@@ -28,4 +28,8 @@ test:
 server:
 	go run main.go
 
-.PHONY: postgres createdb dropdb migrateup migratedown generate sqlc test server
+mock:
+	mockgen -package mockdb -destination db/mock/store.go --build_flags=--mod=mod github.com/bonsi/simplebank/db/sqlc Store
+
+
+.PHONY: postgres createdb dropdb migrateup migratedown generate sqlc test server mock
